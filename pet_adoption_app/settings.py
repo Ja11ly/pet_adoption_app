@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'pets',
     'django_filters',
     'users',
+    "rest_framework.authtoken",
+    "adoptions", 
 
 ]
 
