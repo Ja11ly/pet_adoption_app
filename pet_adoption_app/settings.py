@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "adoptions", 
     "reviews"
     "core"
+    "blog",
 ]
 
 MIDDLEWARE = [
