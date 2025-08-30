@@ -1,11 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Server Error</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/errors.css' %}">
 </head>
-<body style="text-align:center; padding:50px;">
-    <h1>⚠️ 500 - Internal Server Error</h1>
-    <p>Something went wrong on our end. Please try again later.</p>
-    <a href="/">Return Home</a>
+<body>
+    <div class="container">
+        <h1>⚠️ 500 - Server Error</h1>
+        <p>Something went wrong on our end. Please try again later.</p>
+        <a href="/">Return Home</a>
+    </div>
 </body>
 </html>
