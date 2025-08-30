@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "adoptions", 
     "reviews"
+    "core"
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,7 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+# Custom error handlers
+HANDLER404 = "core.views.error_404"
+HANDLER500 = "core.views.error_500"
