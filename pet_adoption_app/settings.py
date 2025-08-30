@@ -20,6 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # The directory where collectstatic will put all static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -55,8 +59,8 @@ INSTALLED_APPS = [
     'users',
     "rest_framework.authtoken",
     "adoptions", 
-    "reviews"
-    "core"
+    "reviews",
+    "core",
     "blog",
 ]
 
@@ -75,7 +79,7 @@ ROOT_URLCONF = 'pet_adoption_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,17 +97,23 @@ WSGI_APPLICATION = 'pet_adoption_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
+if 'PYTHONANYWHERE_DOMAIN' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
