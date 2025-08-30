@@ -25,7 +25,7 @@ STATICFILES_DIRS = [
 ]
 
 # The directory where collectstatic will put all static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR /"blog" / "staticfiles"
 
 #extra places for static files (when adding custom ones later)
 STATICFILES_DIRS = [
@@ -38,10 +38,14 @@ STATICFILES_DIRS = [
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-^juz%%l%=#c&75kt+c*l05j@c0u+=zx$7kb()@#a!@_u-91h)b'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Debug: default False on PythonAnywhere, True locally
+DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+if "PYTHONANYWHERE_DOMAIN" in os.environ:
+    ALLOWED_HOSTS += ["maplelish.pythonanywhere.com"]
+    CSRF_TRUSTED_ORIGINS = ["https://maplelish.pythonanywhere.com"]
 
 
 # Application definition
@@ -105,6 +109,7 @@ if 'PYTHONANYWHERE_DOMAIN' in os.environ:
             'USER': os.environ.get('DB_USER'),
             'PASSWORD': os.environ.get('DB_PASSWORD'),
             'HOST': os.environ.get('DB_HOST'),
+            "PORT": "3306",
         }
     }
 else:
