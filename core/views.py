@@ -7,4 +7,4 @@ def error_500(request):
     return render(request, "errors/500.html", status=500)
 
 def home(request):
-    return render(request, "home.html")
+    return render(request, "base.html")
